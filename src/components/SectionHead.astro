@@ -1,0 +1,16 @@
+---
+interface Props {
+    kanji: string;
+    title: string;
+}
+const { kanji, title } = Astro.props;
+---
+
+<div class="mb-5.5 flex items-baseline gap-3.5">
+    <span class="kan" aria-hidden="true">
+        {kanji}
+    </span>
+    <h2 class="display text-[clamp(34px,5.4vw,58px)] leading-[1.02]">
+        {title}
+    </h2>
+</div>

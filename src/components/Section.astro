@@ -1,0 +1,22 @@
+---
+interface Props {
+    label: string;
+    id?: string;
+    rule?: boolean;
+}
+
+const { label, id, rule = true } = Astro.props;
+---
+
+<section id={id} class={rule ? "relative border-t border-line" : "relative"}>
+    <div class="shell relative z-1 grid grid-cols-1 gap-0 py-[clamp(56px,9vw,104px)] md:grid-cols-[clamp(0px,5vw,64px)_minmax(0,1fr)]">
+        <div class="relative hidden md:block">
+            <span class="sticky top-24 block rotate-180 font-mono text-[8.5px] uppercase tracking-[0.3em] text-ink-faint [writing-mode:vertical-rl]">
+                {label}
+            </span>
+        </div>
+        <div class="min-w-0">
+            <slot />
+        </div>
+    </div>
+</section>

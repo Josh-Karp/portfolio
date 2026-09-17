@@ -1,0 +1,27 @@
+---
+import { toolkit } from "../data/cv";
+import Section from "./Section.astro";
+import SectionHead from "./SectionHead.astro";
+---
+
+<Section label="Toolkit" id="toolkit">
+    <SectionHead kanji="具" title="What's in the bag." />
+    <p class="lede mb-7">
+        Grouped the way it gets used, not the way it looks on a keyword scan.
+    </p>
+
+    <div class="grid grid-cols-1 border-t border-l border-line sm:grid-cols-2 lg:grid-cols-3">
+        {toolkit.map((group) => (
+            <div class="border-r border-b border-line p-[clamp(18px,2.4vw,24px)]">
+                <h4 class="mono mb-3.5">{group.group}</h4>
+                <ul class="m-0 list-none p-0">
+                    {group.items.map((item) => (
+                        <li class="border-b border-line-soft py-1.25 text-[13.5px] text-ink-muted last:border-b-0">
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        ))}
+    </div>
+</Section>

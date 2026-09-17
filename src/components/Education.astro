@@ -1,0 +1,24 @@
+---
+import { education } from "../data/cv";
+import Section from "./Section.astro";
+import Eyebrow from "./Eyebrow.astro";
+---
+
+<Section label="Education" rule={false}>
+    <div class="grid grid-cols-1 items-end gap-6 md:grid-cols-2 md:gap-[clamp(24px,5vw,56px)]">
+        <div>
+            <Eyebrow kanji="学" label={education.years} />
+            <h2 class="display text-[clamp(34px,5.4vw,58px)] leading-[1.02]">
+                {education.headline}
+            </h2>
+        </div>
+        <div>
+            <p class="lede">
+                <strong class="font-normal text-ink">{education.degree}</strong>
+                <br />
+                {education.school}
+            </p>
+            <p class="lede mt-3.5">{education.body}</p>
+        </div>
+    </div>
+</Section>

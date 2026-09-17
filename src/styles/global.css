@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --color-base: #0a0a09;
+  --color-panel: #111110;
+  --color-panel-2: #151513;
+  --color-ink: #e9e5dc;
+  --color-ink-muted: #9d988c;
+  --color-ink-faint: #6a675e;
+  --color-bone: #ded6c1;
+  --color-bone-lit: #ece5d3;
+  --color-seal: #9e3b2a;
+  --color-line: rgb(233 229 220 / 0.13);
+  --color-line-soft: rgb(233 229 220 / 0.06);
+
+  --font-display: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: "Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --animate-marquee: marquee 46s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-base text-ink font-sans font-light text-[15px] leading-[1.6] antialiased overflow-x-hidden;
+  }
+
+  /* Halftone ground texture */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgb(233 229 220 / 0.055) 0.5px, transparent 0.5px);
+    background-size: 4px 4px;
+  }
+
+  :focus-visible {
+    @apply outline outline-offset-[3px] outline-bone;
+  }
+
+  ::selection {
+    @apply bg-bone text-base;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}
+
+@layer components {
+  /* Small tracked data label — the page's connective tissue */
+  .mono {
+    @apply font-mono text-[9.5px] font-normal uppercase tracking-[0.22em] text-ink-faint;
+  }
+
+  .btn {
+    @apply inline-block border border-line px-3.25 py-1.5 font-mono text-[9.5px]
+           uppercase tracking-[0.22em] text-ink no-underline transition-colors
+           hover:border-ink-muted;
+  }
+
+  .btn-solid {
+    @apply border-bone bg-bone text-base hover:bg-bone-lit hover:border-bone-lit;
+  }
+
+  .lede {
+    @apply max-w-[56ch] text-[14.5px] leading-[1.75] text-ink-muted;
+  }
+
+  .display {
+    @apply font-display font-normal tracking-[-0.005em];
+  }
+
+  .kan {
+    @apply font-display text-[15px] text-ink-faint;
+  }
+
+  .tag {
+    @apply border border-line px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-muted;
+  }
+
+  .shell {
+    @apply mx-auto w-full max-w-310 px-[clamp(18px,4vw,44px)];
+  }
+}
+
+@utility barcode {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-ink-muted) 0 1px, transparent 1px 3px,
+    var(--color-ink-muted) 3px 5px, transparent 5px 6px,
+    var(--color-ink-muted) 6px 7px, transparent 7px 10px,
+    var(--color-ink-muted) 10px 13px, transparent 13px 14px,
+    var(--color-ink-muted) 14px 15px, transparent 15px 18px
+  );
+}

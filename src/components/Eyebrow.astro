@@ -1,0 +1,20 @@
+---
+interface Props {
+    kanji?: string;
+    label: string;
+    bar?: boolean;
+}
+const { kanji, label, bar = false } = Astro.props;
+---
+
+<div class="mb-4.5 flex items-center gap-2.5">
+    {bar && (
+        <span class="h-px w-5.5 shrink-0 bg-line" aria-hidden="true"></span>
+    )}
+    {kanji && (
+        <span class="kan" aria-hidden="true">
+            {kanji}
+        </span>
+    )}
+    <span class="mono">{label}</span>
+</div>

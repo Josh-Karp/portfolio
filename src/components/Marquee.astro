@@ -1,0 +1,21 @@
+---
+import { marquee } from "../data/cv";
+/** Duplicated once so the -50% translate loops seamlessly. */
+const track = [...marquee, ...marquee];
+---
+
+<div
+    class="relative z-1 overflow-hidden border-y border-line"
+    aria-hidden="true"
+>
+    <div class="flex w-max animate-marquee motion-reduce:animate-none">
+        {track.map((item) => (
+            <div class="flex items-baseline gap-2.25 border-r border-line px-7 py-3.75 whitespace-nowrap">
+                <em class="font-display text-[21px] not-italic text-ink">
+                    {item.name}
+                </em>
+                <span class="mono">{item.note}</span>
+            </div>
+        ))}
+    </div>
+</div>

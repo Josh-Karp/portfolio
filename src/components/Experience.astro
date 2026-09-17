@@ -1,0 +1,43 @@
+---
+import { jobs } from "../data/cv";
+import Section from "./Section.astro";
+import SectionHead from "./SectionHead.astro";
+---
+
+<Section label="Record" id="work">
+    <SectionHead kanji="歴" title="The record." />
+    <p class="lede mb-6.5">
+        Two roles, one throughline: sit close to the people whose work the
+        software is supposed to carry.
+    </p>
+
+    <div class="border-b border-line">
+        {jobs.map((job) => (
+            <article class="grid grid-cols-1 gap-3.5 border-t border-line py-[clamp(26px,4vw,38px)] md:grid-cols-[minmax(0,0.9fr)_minmax(0,2fr)] md:gap-[clamp(16px,4vw,48px)]">
+                <div>
+                    <p class="font-mono text-[10px] tracking-[0.18em] text-ink-muted">
+                        {job.when}
+                    </p>
+                    <p class="mt-1.5 text-[12.5px] text-ink-faint">
+                        {job.company}
+                        <br />
+                        {job.where}
+                    </p>
+                </div>
+                <div>
+                    <h3 class="display mb-1.5 text-[clamp(20px,2.4vw,26px)] leading-[1.15]">
+                        {job.role}
+                    </h3>
+                    <p class="mono mb-3.5">{job.scope}</p>
+                    <ul class="m-0 list-none p-0">
+                        {job.points.map((point) => (
+                            <li class="relative pb-2.5 pl-4.5 text-[13.5px] text-ink-muted before:absolute before:top-2.2 before:left-0 before:h-px before:w-1.5 before:bg-ink-faint before:content-['']">
+                                {point}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </article>
+        ))}
+    </div>
+</Section>

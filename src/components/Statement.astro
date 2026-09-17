@@ -1,0 +1,36 @@
+---
+import { statement } from "../data/cv";
+import Section from "./Section.astro";
+import Eyebrow from "./Eyebrow.astro";
+---
+
+<Section label="Background">
+    <div class="grid grid-cols-1 items-start gap-[clamp(24px,5vw,56px)] lg:grid-cols-[minmax(0,1.55fr)_minmax(0,0.75fr)]">
+        <div>
+            <Eyebrow kanji="経" label="In short" />
+            <p class="max-w-[24ch] text-[clamp(23px,3.1vw,34px)] leading-[1.32] font-light tracking-[-0.01em]">
+                {statement.headline}
+            </p>
+            <p class="lede mt-5.5">{statement.body}</p>
+        </div>
+
+        <div class="border border-line bg-panel p-[clamp(18px,3vw,26px)]">
+            <div class="mb-4.5 flex justify-between">
+                <span class="mono">Current</span>
+                <span class="kan" aria-hidden="true">
+                    技
+                </span>
+            </div>
+            <ul class="m-0 list-none p-0">
+                {statement.current.map((line, i) => (
+                    <li class="flex items-baseline gap-3.5 border-b border-line-soft py-2.25 text-[13.5px] text-ink-muted last:border-b-0">
+                        <b class="shrink-0 basis-5.5 font-mono text-[9.5px] font-normal tracking-[0.18em] text-ink-faint">
+                            {String(i + 1).padStart(2, "0")}
+                        </b>
+                        <span>{line}</span>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    </div>
+</Section>

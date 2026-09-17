@@ -1,0 +1,43 @@
+---
+import { profile, nav } from "../data/cv";
+---
+
+<header class="sticky top-0 z-40 border-b border-line bg-base/85 backdrop-blur-[14px]">
+    <div class="shell flex h-13 items-center gap-5">
+        <a
+            href="#top"
+            class="flex items-center gap-2.25 font-display text-[17px] no-underline"
+        >
+            <span class="text-bone" aria-hidden="true">
+                {profile.mark}
+            </span>
+            {profile.name}
+        </a>
+
+        <nav class="mx-auto hidden gap-6.5 lg:flex" aria-label="Sections">
+            {nav.map((item) => (
+                <a
+                    href={item.href}
+                    class="mono no-underline transition-colors hover:text-ink"
+                >
+                    {item.label}
+                </a>
+            ))}
+        </nav>
+
+        <div class="ml-auto flex items-center gap-2">
+            <span class="mono hidden border border-line px-2.25 py-1.25 whitespace-nowrap lg:inline-block">
+                <span class="text-bone" aria-hidden="true">
+                    ■
+                </span>
+                Pretoria · <span data-clock="short">—</span> SAST
+            </span>
+            <span class="mono hidden border border-line px-2.25 py-1.25 lg:inline-block">
+                7+ yrs
+            </span>
+            <a class="btn" href={`mailto:${profile.email}`}>
+                Email
+            </a>
+        </div>
+    </div>
+</header>

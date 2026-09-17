@@ -1,0 +1,49 @@
+---
+import { stack } from "../data/cv";
+import Section from "./Section.astro";
+import SectionHead from "./SectionHead.astro";
+---
+
+<Section label="Stack" id="stack">
+    <SectionHead kanji="前" title="Both halves." />
+    <p class="lede mb-7">{stack.intro}</p>
+
+    <div class="grid grid-cols-1 border-t border-l border-line md:grid-cols-2">
+        {stack.halves.map((half) => (
+            <div class="border-r border-b border-line p-[clamp(20px,3vw,30px)]">
+                <div class="mb-4 flex items-start justify-between">
+                    <span class="mono">{half.eyebrow}</span>
+                    <span class="kan" aria-hidden="true">
+                        {half.kanji}
+                    </span>
+                </div>
+                <h3 class="display mb-2.5 text-[clamp(20px,2.4vw,26px)] leading-[1.15]">
+                    {half.title}
+                </h3>
+                <p class="lede">{half.body}</p>
+                <div class="mt-4.5 flex flex-wrap gap-1.5">
+                    {half.tags.map((tag) => (
+                        <span class="tag">{tag}</span>
+                    ))}
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <div class="mt-5 overflow-x-auto border border-line bg-panel">
+        <div class="flex justify-between border-b border-line px-3 py-1.75">
+            <span class="mono">~/joshua</span>
+            <span class="mono">zsh</span>
+        </div>
+        <div class="px-3 py-3.5 font-mono text-[11.5px] leading-[1.95] text-ink-muted">
+            {stack.terminal.map((line) => (
+                <div class="mb-3 whitespace-nowrap last:mb-0">
+                    <div>
+                        <span class="text-ink-faint">$</span> {line.cmd}
+                    </div>
+                    <div class="text-ink">{line.out}</div>
+                </div>
+            ))}
+        </div>
+    </div>
+</Section>
