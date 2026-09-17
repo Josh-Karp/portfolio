@@ -35,13 +35,13 @@ an object to `src/data/cv.ts` — no component changes.
 Everything visual comes from the `@theme` block in `src/styles/global.css`.
 Tailwind v4 generates utilities from those variables automatically:
 
-| Token              | Utilities                                  |
-| ------------------ | ------------------------------------------ |
-| `--color-bone`     | `text-bone` `bg-bone` `border-bone`        |
-| `--color-ink-faint`| `text-ink-faint` …                         |
-| `--color-line`     | `border-line` (all hairline rules)          |
-| `--font-display`   | `font-display` (Instrument Serif)          |
-| `--animate-marquee`| `animate-marquee`                          |
+| Token               | Utilities                           |
+| ------------------- | ----------------------------------- |
+| `--color-bone`      | `text-bone` `bg-bone` `border-bone` |
+| `--color-ink-faint` | `text-ink-faint` …                  |
+| `--color-line`      | `border-line` (all hairline rules)  |
+| `--font-display`    | `font-display` (Instrument Serif)   |
+| `--animate-marquee` | `animate-marquee`                   |
 
 Change the palette in one place and the whole page follows.
 

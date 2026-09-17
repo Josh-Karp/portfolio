@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-base: #0a0a09;
@@ -13,15 +13,19 @@
   --color-line: rgb(233 229 220 / 0.13);
   --color-line-soft: rgb(233 229 220 / 0.06);
 
-  --font-display: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-  --font-sans: "Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-display: 'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-sans: 'Space Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
 
   --animate-marquee: marquee 46s linear infinite;
 
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 }
 
@@ -37,7 +41,7 @@
 
   /* Halftone ground texture */
   body::before {
-    content: "";
+    content: '';
     position: fixed;
     inset: 0;
     z-index: 0;
@@ -55,8 +59,12 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
     }
@@ -103,10 +111,15 @@
 @utility barcode {
   background: repeating-linear-gradient(
     90deg,
-    var(--color-ink-muted) 0 1px, transparent 1px 3px,
-    var(--color-ink-muted) 3px 5px, transparent 5px 6px,
-    var(--color-ink-muted) 6px 7px, transparent 7px 10px,
-    var(--color-ink-muted) 10px 13px, transparent 13px 14px,
-    var(--color-ink-muted) 14px 15px, transparent 15px 18px
+    var(--color-ink-muted) 0 1px,
+    transparent 1px 3px,
+    var(--color-ink-muted) 3px 5px,
+    transparent 5px 6px,
+    var(--color-ink-muted) 6px 7px,
+    transparent 7px 10px,
+    var(--color-ink-muted) 10px 13px,
+    transparent 13px 14px,
+    var(--color-ink-muted) 14px 15px,
+    transparent 15px 18px
   );
 }
