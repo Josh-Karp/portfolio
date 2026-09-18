@@ -3,14 +3,10 @@ import { profile, jobs } from "../data/cv";
 ---
 
 <div
-    class="terminal-shell relative overflow-hidden border border-line bg-[linear-gradient(180deg,rgb(17_17_16/0.98),rgb(10_10_9/0.98))] shadow-[0_20px_70px_rgb(0_0_0/0.22)]"
+    class="terminal-shell motion-terminal relative overflow-hidden border border-line bg-[linear-gradient(180deg,rgb(17_17_16/0.98),rgb(10_10_9/0.98))] shadow-[0_20px_70px_rgb(0_0_0/0.22)]"
     data-terminal
 >
-    <div
-        class="pointer-events-none absolute inset-0 opacity-20"
-        aria-hidden="true"
-        style="background-image:linear-gradient(rgb(85 214 160 / 0.035) 1px, transparent 1px),linear-gradient(90deg,rgb(85 214 160 / 0.025) 1px,transparent 1px);background-size:24px 24px;"
-    ></div>
+    <div class="pointer-events-none absolute inset-0 opacity-20" aria-hidden="true" style="background-image:linear-gradient(rgb(85 214 160 / 0.035) 1px, transparent 1px),linear-gradient(90deg,rgb(85 214 160 / 0.025) 1px,transparent 1px);background-size:24px 24px;"></div>
 
     <div class="relative flex items-center justify-between border-b border-line px-3 py-2">
         <div class="flex items-center gap-1.5" aria-hidden="true">
@@ -18,24 +14,14 @@ import { profile, jobs } from "../data/cv";
             <span class="h-2 w-2 rounded-full border border-ink-faint/70 bg-base"></span>
             <span class="h-2 w-2 rounded-full border border-ink-faint/70 bg-base"></span>
         </div>
-
-        <div class="absolute left-1/2 -translate-x-1/2 font-mono text-[8.5px] uppercase tracking-[0.2em] text-ink-faint">
-            {profile.name.toUpperCase()}@PORTFOLIO · ZSH
-        </div>
-
+        <div class="absolute left-1/2 -translate-x-1/2 font-mono text-[8.5px] uppercase tracking-[0.2em] text-ink-faint">{profile.name.toUpperCase()}@PORTFOLIO · ZSH</div>
         <div class="flex items-center gap-2 font-mono text-[8.5px] uppercase tracking-[0.18em] text-ink-faint">
             <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
             <span data-terminal-status>ONLINE</span>
         </div>
     </div>
 
-    <div
-        class="relative min-h-[360px] max-h-[500px] overflow-y-auto px-3 py-4 sm:px-4 sm:py-5"
-        data-terminal-screen
-        aria-live="polite"
-        aria-label="Interactive terminal"
-        tabindex="0"
-    >
+    <div class="relative min-h-[360px] max-h-[500px] overflow-y-auto px-3 py-4 sm:px-4 sm:py-5" data-terminal-screen aria-live="polite" aria-label="Interactive terminal" tabindex="0">
         <div class="space-y-2 font-mono text-[11px] leading-[1.75] sm:text-[11.5px]">
             <div class="text-ink-faint" data-terminal-boot>
                 <div><span class="text-accent">[boot]</span> establishing secure shell...</div>
@@ -43,25 +29,13 @@ import { profile, jobs } from "../data/cv";
                 <div class="opacity-70">       loading experience record</div>
                 <div class="opacity-70">       loading stack manifest</div>
             </div>
-
             <div class="hidden" data-terminal-session>
                 <div data-terminal-output></div>
-
                 <form class="mt-2 flex items-center gap-2" data-terminal-form>
                     <span class="shrink-0 text-accent">joshua@portfolio</span>
                     <span class="text-ink-faint">~/cv %</span>
                     <label class="sr-only" for="terminal-input">Terminal command</label>
-                    <input
-                        id="terminal-input"
-                        name="command"
-                        class="min-w-0 flex-1 border-0 bg-transparent p-0 font-mono text-[11px] leading-[1.75] text-ink outline-none placeholder:text-ink-faint sm:text-[11.5px]"
-                        autocomplete="off"
-                        autocapitalize="off"
-                        autocorrect="off"
-                        spellcheck="false"
-                        aria-label="Terminal command"
-                        placeholder="type help"
-                    />
+                    <input id="terminal-input" name="command" class="min-w-0 flex-1 border-0 bg-transparent p-0 font-mono text-[11px] leading-[1.75] text-ink outline-none placeholder:text-ink-faint sm:text-[11.5px]" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Terminal command" placeholder="type help" />
                     <span class="inline-block h-[1.1em] w-1.5 bg-accent/80 animate-pulse" aria-hidden="true"></span>
                 </form>
             </div>
@@ -78,7 +52,6 @@ import { profile, jobs } from "../data/cv";
     (() => {
         const root = document.querySelector("[data-terminal]");
         if (!root) return;
-
         const screen = root.querySelector("[data-terminal-screen]");
         const boot = root.querySelector("[data-terminal-boot]");
         const session = root.querySelector("[data-terminal-session]");
@@ -87,181 +60,63 @@ import { profile, jobs } from "../data/cv";
         const input = root.querySelector("#terminal-input");
         const status = root.querySelector("[data-terminal-status]");
 
-        if (
-            !(screen instanceof HTMLElement) ||
-            !(boot instanceof HTMLElement) ||
-            !(session instanceof HTMLElement) ||
-            !(output instanceof HTMLElement) ||
-            !(form instanceof HTMLFormElement) ||
-            !(input instanceof HTMLInputElement) ||
-            !(status instanceof HTMLElement)
-        ) {
-            return;
-        }
+        if (!(screen instanceof HTMLElement) || !(boot instanceof HTMLElement) || !(session instanceof HTMLElement) || !(output instanceof HTMLElement) || !(form instanceof HTMLFormElement) || !(input instanceof HTMLInputElement) || !(status instanceof HTMLElement)) return;
 
-        const prefersReducedMotion = window.matchMedia(
-            "(prefers-reduced-motion: reduce)",
-        ).matches;
-
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const history = [];
-        const commands = [
-            "help",
-            "whoami",
-            "stack",
-            "experience",
-            "system",
-            "contact",
-            "neofetch",
-            "clear",
-            "sudo hire joshua",
-        ];
+        const commands = ["help", "whoami", "stack", "experience", "system", "contact", "neofetch", "clear", "sudo hire joshua"];
         let historyIndex = 0;
 
-        const prompt = () =>
-            '<span class="text-accent">joshua@portfolio</span><span class="text-ink-faint"> ~/cv % </span>';
-
-        const escapeHtml = (value) =>
-            value
-                .replaceAll("&", "&amp;")
-                .replaceAll("<", "&lt;")
-                .replaceAll(">", "&gt;")
-                .replaceAll('"', "&quot;")
-                .replaceAll("'", "&#039;");
-
+        const prompt = () => '<span class="text-accent">joshua@portfolio</span><span class="text-ink-faint"> ~/cv % </span>';
+        const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
         const line = (content, className = "text-ink-muted") => {
             const el = document.createElement("div");
             el.className = className;
             el.innerHTML = content;
             return el;
         };
-
-        const printCommand = (command) => {
-            output.append(line(prompt() + escapeHtml(command), "text-ink"));
-        };
-
-        const printOutput = (content, className = "text-ink-muted") => {
-            output.append(line(content, className));
-        };
-
-        const scrollToBottom = () => {
-            screen.scrollTop = screen.scrollHeight;
-        };
+        const printCommand = (command) => output.append(line(prompt() + escapeHtml(command), "text-ink"));
+        const printOutput = (content, className = "text-ink-muted") => output.append(line(content, className));
+        const scrollToBottom = () => { screen.scrollTop = screen.scrollHeight; };
 
         const runCommand = (rawCommand) => {
             const command = rawCommand.trim().toLowerCase();
             if (!command) return;
-
             if (command === "clear" || command === "cls") {
                 output.replaceChildren();
                 return;
             }
-
             printCommand(rawCommand);
-
             switch (command) {
                 case "help":
-                    printOutput(
-                        [
-                            '<span class="text-ink">Available commands</span>',
-                            "  whoami       identity + role",
-                            "  stack        core technologies",
-                            "  experience   current + previous role",
-                            "  system       engineering principles",
-                            "  contact      open an email",
-                            "  neofetch     portfolio system summary",
-                            "  clear        clear the session",
-                            "  sudo hire joshua",
-                        ].join("<br>"),
-                    );
+                    printOutput(['<span class="text-ink">Available commands</span>', "  whoami       identity + role", "  stack        core technologies", "  experience   current + previous role", "  system       engineering principles", "  contact      open an email", "  neofetch     portfolio system summary", "  clear        clear the session", "  sudo hire joshua"].join("<br>"));
                     break;
-
                 case "whoami":
-                    printOutput(
-                        '<span class="text-ink">' +
-                            escapeHtml(profile.name) +
-                            "</span><br>" +
-                            escapeHtml(profile.title) +
-                            " · " +
-                            escapeHtml(profile.location) +
-                            '<br><span class="text-accent">7+ years</span> shipping production software',
-                    );
+                    printOutput('<span class="text-ink">' + escapeHtml(profile.name) + "</span><br>" + escapeHtml(profile.title) + " · " + escapeHtml(profile.location) + '<br><span class="text-accent">7+ years</span> shipping production software');
                     break;
-
                 case "stack":
-                    printOutput(
-                        '<span class="text-ink">FRONTEND</span>  React · TypeScript · Redux · React Query · Zustand · Tailwind<br><span class="text-ink">BACKEND</span>   Odoo v12–v14 · Python · Node.js · Fastify · PostgreSQL<br><span class="text-ink">TRANSPORT</span> REST · GraphQL · XML-RPC',
-                    );
+                    printOutput('<span class="text-ink">FRONTEND</span>  React · TypeScript · Redux · React Query · Zustand · Tailwind<br><span class="text-ink">BACKEND</span>   Odoo v12–v14 · Python · Node.js · Fastify · PostgreSQL<br><span class="text-ink">TRANSPORT</span> REST · GraphQL · XML-RPC');
                     break;
-
                 case "experience":
-                    printOutput(
-                        '<span class="text-ink">' +
-                            escapeHtml(jobs[0].when) +
-                            "</span>  " +
-                            escapeHtml(jobs[0].role) +
-                            " · " +
-                            escapeHtml(jobs[0].company) +
-                            "<br>" +
-                            escapeHtml(jobs[0].scope) +
-                            '<br><br><span class="text-ink">' +
-                            escapeHtml(jobs[1].when) +
-                            "</span>  " +
-                            escapeHtml(jobs[1].role) +
-                            " · " +
-                            escapeHtml(jobs[1].company),
-                    );
+                    printOutput('<span class="text-ink">' + escapeHtml(jobs[0].when) + "</span>  " + escapeHtml(jobs[0].role) + " · " + escapeHtml(jobs[0].company) + "<br>" + escapeHtml(jobs[0].scope) + '<br><br><span class="text-ink">' + escapeHtml(jobs[1].when) + "</span>  " + escapeHtml(jobs[1].role) + " · " + escapeHtml(jobs[1].company));
                     break;
-
                 case "system":
-                    printOutput(
-                        '<span class="text-ink">DESIGN → MODEL → BUILD → REVIEW → SHIP</span><br>Build around the people doing the work. Prefer configuration to forks. Keep the system understandable.',
-                    );
+                    printOutput('<span class="text-ink">DESIGN → MODEL → BUILD → REVIEW → SHIP</span><br>Build around the people doing the work. Prefer configuration to forks. Keep the system understandable.');
                     break;
-
                 case "contact":
-                    printOutput(
-                        'Opening <span class="text-accent">' +
-                            escapeHtml(profile.email) +
-                            "</span>...",
-                        "text-ink",
-                    );
-                    window.location.href =
-                        "mailto:" +
-                        profile.email +
-                        "?subject=Portfolio%20enquiry";
+                    printOutput('Opening <span class="text-accent">' + escapeHtml(profile.email) + "</span>...", "text-ink");
+                    window.location.href = "mailto:" + profile.email + "?subject=Portfolio%20enquiry";
                     break;
-
                 case "neofetch":
-                    printOutput(
-                        '<span class="text-accent">匠</span>  <span class="text-ink">' +
-                            escapeHtml(profile.name) +
-                            "</span><br>──────────────<br>OS        Portfolio OS<br>Shell     zsh<br>Role      " +
-                            escapeHtml(profile.title) +
-                            "<br>Location  " +
-                            escapeHtml(profile.location) +
-                            '<br>Uptime    7+ years<br>Stack     React / Odoo / Node<br>Status    <span class="text-accent">READY</span>',
-                    );
+                    printOutput('<span class="text-accent">匠</span>  <span class="text-ink">' + escapeHtml(profile.name) + "</span><br>──────────────<br>OS        Portfolio OS<br>Shell     zsh<br>Role      " + escapeHtml(profile.title) + "<br>Location  " + escapeHtml(profile.location) + '<br>Uptime    7+ years<br>Stack     React / Odoo / Node<br>Status    <span class="text-accent">READY</span>');
                     break;
-
                 case "sudo hire joshua":
-                    printOutput(
-                        '[sudo] password for recruiter: <span class="text-ink-faint">********</span><br><span class="text-accent">✓ access granted</span><br>Opening communication channel...',
-                        "text-ink",
-                    );
-                    window.setTimeout(() => {
-                        window.location.href =
-                            "mailto:" + profile.email + "?subject=Let's%20talk";
-                    }, 500);
+                    printOutput('[sudo] password for recruiter: <span class="text-ink-faint">********</span><br><span class="text-accent">✓ access granted</span><br>Opening communication channel...', "text-ink");
+                    window.setTimeout(() => { window.location.href = "mailto:" + profile.email + "?subject=Let's%20talk"; }, 500);
                     break;
-
                 default:
-                    printOutput(
-                        "zsh: command not found: " +
-                            escapeHtml(rawCommand) +
-                            '<br>Type <span class="text-accent">help</span> for available commands.',
-                    );
+                    printOutput("zsh: command not found: " + escapeHtml(rawCommand) + '<br>Type <span class="text-accent">help</span> for available commands.');
             }
-
             scrollToBottom();
         };
 
@@ -269,34 +124,14 @@ import { profile, jobs } from "../data/cv";
             const complete = () => {
                 boot.classList.add("hidden");
                 session.classList.remove("hidden");
-                printOutput(
-                    '<span class="text-accent">✓</span> session ready · type <span class="text-ink">help</span> to inspect the system',
-                    "text-ink-faint",
-                );
+                printOutput('<span class="text-accent">✓</span> session ready · type <span class="text-ink">help</span> to inspect the system', "text-ink-faint");
                 status.textContent = "READY";
                 input.focus();
             };
-
-            if (prefersReducedMotion) {
-                complete();
-                return;
-            }
-
-            window.setTimeout(() => {
-                boot.innerHTML += '<div><span class="text-accent">[ok]</span> profile index loaded</div>';
-                scrollToBottom();
-            }, 180);
-
-            window.setTimeout(() => {
-                boot.innerHTML += '<div><span class="text-accent">[ok]</span> experience record loaded</div>';
-                scrollToBottom();
-            }, 360);
-
-            window.setTimeout(() => {
-                boot.innerHTML += '<div><span class="text-accent">[ok]</span> stack manifest loaded</div>';
-                scrollToBottom();
-            }, 540);
-
+            if (reducedMotion) { complete(); return; }
+            window.setTimeout(() => { boot.innerHTML += '<div><span class="text-accent">[ok]</span> profile index loaded</div>'; scrollToBottom(); }, 180);
+            window.setTimeout(() => { boot.innerHTML += '<div><span class="text-accent">[ok]</span> experience record loaded</div>'; scrollToBottom(); }, 360);
+            window.setTimeout(() => { boot.innerHTML += '<div><span class="text-accent">[ok]</span> stack manifest loaded</div>'; scrollToBottom(); }, 540);
             window.setTimeout(complete, 760);
         };
 
@@ -304,7 +139,6 @@ import { profile, jobs } from "../data/cv";
             event.preventDefault();
             const command = input.value.trim();
             if (!command) return;
-
             history.push(command);
             historyIndex = history.length;
             input.value = "";
@@ -318,28 +152,19 @@ import { profile, jobs } from "../data/cv";
                 historyIndex = Math.max(0, historyIndex - 1);
                 input.value = history[historyIndex] || "";
             }
-
             if (event.key === "ArrowDown") {
                 event.preventDefault();
                 if (!history.length) return;
                 historyIndex = Math.min(history.length, historyIndex + 1);
                 input.value = history[historyIndex] || "";
             }
-
             if (event.key === "Tab") {
                 event.preventDefault();
                 const value = input.value.trim().toLowerCase();
                 if (!value) return;
-
-                const matches = commands.filter((command) =>
-                    command.startsWith(value),
-                );
-
-                if (matches.length === 1) {
-                    input.value = matches[0];
-                }
+                const matches = commands.filter((command) => command.startsWith(value));
+                if (matches.length === 1) input.value = matches[0];
             }
-
             if (event.key === "c" && event.ctrlKey) {
                 event.preventDefault();
                 input.value = "";
@@ -351,7 +176,6 @@ import { profile, jobs } from "../data/cv";
 
         screen.addEventListener("click", () => input.focus());
         screen.addEventListener("focus", () => input.focus());
-
         bootTerminal();
     })();
 </script>
