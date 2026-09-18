@@ -2,6 +2,7 @@
 import { stack } from "../data/cv";
 import Section from "./Section.astro";
 import SectionHead from "./SectionHead.astro";
+import Terminal from "./Terminal.astro";
 ---
 
 <Section label="Stack" id="stack">
@@ -30,20 +31,7 @@ import SectionHead from "./SectionHead.astro";
         ))}
     </div>
 
-    <div class="mt-5 overflow-x-auto border border-line bg-panel">
-        <div class="flex justify-between border-b border-line px-3 py-1.75">
-            <span class="mono">~/joshua</span>
-            <span class="mono">zsh</span>
-        </div>
-        <div class="px-3 py-3.5 font-mono text-[11.5px] leading-[1.95] text-ink-muted">
-            {stack.terminal.map((line) => (
-                <div class="mb-3 whitespace-nowrap last:mb-0">
-                    <div>
-                        <span class="text-ink-faint">$</span> {line.cmd}
-                    </div>
-                    <div class="text-ink">{line.out}</div>
-                </div>
-            ))}
-        </div>
+    <div class="mt-5">
+        <Terminal />
     </div>
 </Section>

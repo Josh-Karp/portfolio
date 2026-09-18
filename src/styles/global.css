@@ -10,6 +10,9 @@
   --color-bone: #ded6c1;
   --color-bone-lit: #ece5d3;
   --color-seal: #9e3b2a;
+  --color-accent: #55d6a0;
+  --color-accent-soft: rgb(85 214 160 / 0.55);
+  --color-accent-faint: rgb(85 214 160 / 0.16);
   --color-line: rgb(233 229 220 / 0.13);
   --color-line-soft: rgb(233 229 220 / 0.06);
 
@@ -51,7 +54,7 @@
   }
 
   :focus-visible {
-    @apply outline outline-offset-[3px] outline-bone;
+    @apply outline outline-offset-[3px] outline-accent;
   }
 
   ::selection {
@@ -80,7 +83,7 @@
   .btn {
     @apply inline-block border border-line px-3.25 py-1.5 font-mono text-[9.5px]
            uppercase tracking-[0.22em] text-ink no-underline transition-colors
-           hover:border-ink-muted;
+           hover:border-accent-soft hover:text-accent;
   }
 
   .btn-solid {
@@ -100,7 +103,8 @@
   }
 
   .tag {
-    @apply border border-line px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-muted;
+    @apply border border-line px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-muted transition-colors
+           hover:border-accent-faint hover:text-accent;
   }
 
   .shell {
