@@ -23,12 +23,33 @@
   --animate-marquee: marquee 46s linear infinite;
 
   @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes ambient-drift {
+    0%, 100% { transform: translate3d(-1%, -1%, 0) scale(1); }
+    50% { transform: translate3d(1%, 1%, 0) scale(1.04); }
+  }
+
+  @keyframes nav-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes hero-in {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes portrait-float {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -5px, 0); }
+  }
+
+  @keyframes portrait-sheen {
+    from { transform: translateX(-130%); }
+    to { transform: translateX(170%); }
   }
 }
 
@@ -42,7 +63,6 @@
     @apply bg-base text-ink font-sans font-light text-[15px] leading-[1.6] antialiased overflow-x-hidden;
   }
 
-  /* Halftone ground texture */
   body::before {
     content: '';
     position: fixed;
@@ -51,6 +71,20 @@
     pointer-events: none;
     background-image: radial-gradient(rgb(233 229 220 / 0.055) 0.5px, transparent 0.5px);
     background-size: 4px 4px;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: -25%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.2;
+    background:
+      radial-gradient(circle at 62% 16%, rgb(85 214 160 / 0.08), transparent 28%),
+      radial-gradient(circle at 16% 70%, rgb(85 214 160 / 0.04), transparent 24%);
+    filter: blur(12px);
+    animation: ambient-drift 22s ease-in-out infinite;
   }
 
   :focus-visible {
@@ -62,28 +96,25 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    *,
-    *::before,
-    *::after {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 }
 
 @layer components {
-  /* Small tracked data label — the page's connective tissue */
   .mono {
     @apply font-mono text-[9.5px] font-normal uppercase tracking-[0.22em] text-ink-faint;
   }
 
   .btn {
     @apply inline-block border border-line px-3.25 py-1.5 font-mono text-[9.5px]
-           uppercase tracking-[0.22em] text-ink no-underline transition-colors
-           hover:border-accent-soft hover:text-accent;
+           uppercase tracking-[0.22em] text-ink no-underline transition-[border-color,color,transform]
+           duration-300 hover:-translate-y-px hover:border-accent-soft hover:text-accent;
   }
 
   .btn-solid {
@@ -103,13 +134,94 @@
   }
 
   .tag {
-    @apply border border-line px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-muted transition-colors
-           hover:border-accent-faint hover:text-accent;
+    @apply border border-line px-2 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-muted transition-[border-color,color,transform]
+           duration-300 hover:-translate-y-px hover:border-accent-faint hover:text-accent;
   }
 
   .shell {
     @apply mx-auto w-full max-w-310 px-[clamp(18px,4vw,44px)];
   }
+
+  .motion-ready [data-motion-reveal] {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--motion-delay, 0ms);
+  }
+
+  .motion-ready [data-motion-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .motion-ready [data-motion-line]::after {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .motion-ready [data-motion-line].is-visible::after {
+    transform: scaleX(1);
+  }
+
+  .motion-nav {
+    animation: nav-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .motion-hero {
+    animation: hero-in 850ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
+  }
+
+  .motion-portrait {
+    animation: portrait-float 9s ease-in-out 1.1s infinite;
+    will-change: transform;
+  }
+
+  .motion-portrait:hover {
+    animation-play-state: paused;
+    transform: translateY(-4px);
+  }
+
+  .motion-portrait-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .motion-portrait-sheen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -15%;
+    width: 18%;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgb(85 214 160 / 0.07), transparent);
+    transform: translateX(-130%);
+    animation: portrait-sheen 9s ease-in-out 2.5s infinite;
+  }
+
+  .motion-terminal {
+    transition:
+      transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .motion-terminal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 24px 80px rgb(0 0 0 / 0.24);
+  }
+
+  .motion-status {
+    box-shadow: 0 0 0 0 rgb(85 214 160 / 0.24);
+    animation: status-pulse 3.4s ease-out infinite;
+  }
+}
+
+@keyframes status-pulse {
+  0%, 55%, 100% { box-shadow: 0 0 0 0 rgb(85 214 160 / 0); }
+  20% { box-shadow: 0 0 0 5px rgb(85 214 160 / 0.12); }
 }
 
 @utility barcode {
