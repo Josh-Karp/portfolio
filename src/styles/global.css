@@ -72,7 +72,7 @@
 }
 
 @layer components {
-  /* Small tracked data label — the page's connective tissue */
+  /* Small tracked data label, the page's connective tissue */
   .mono {
     @apply font-mono text-[9.5px] font-normal uppercase tracking-[0.22em] text-ink-faint;
   }
