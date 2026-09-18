@@ -8,7 +8,7 @@ export const profile = {
   phoneHref: 'tel:+27795536030',
   mark: '匠',
   description:
-    'Joshua Karp — senior full-stack engineer in Pretoria, South Africa. React front ends on Odoo backends, CRM and LMS systems, seven years in.',
+    'Joshua Karp, senior full-stack engineer in Pretoria, South Africa. React front ends on Odoo backends, CRM and LMS systems, seven years in.',
 };
 
 export const spec = [
@@ -54,7 +54,7 @@ export const pillars = [
     kanji: '実',
     eyebrow: 'Delivery',
     title: 'Then shipping.',
-    body: 'Real-time dashboards, origination processes and client portals — built with a team, reviewed as a team, deployed on a pipeline rather than a good mood.',
+    body: 'Real-time dashboards, origination processes and client portals, built with a team, reviewed as a team, and deployed on a pipeline rather than a good mood.',
     points: [
       'Leading a division of developers and its review culture',
       'Performance work on interfaces people use all day',
@@ -71,7 +71,7 @@ export const stack = {
       kanji: '前',
       eyebrow: 'Client side',
       title: 'Portals people live in',
-      body: 'React front ends wired to Odoo — dashboards that update in real time, origination processes, and interfaces customised per tenant without a separate codebase for each.',
+      body: 'React front ends wired to Odoo, including dashboards that update in real time, origination processes, and interfaces customised per tenant without a separate codebase for each.',
       tags: [
         'React',
         'TypeScript',
@@ -88,20 +88,11 @@ export const stack = {
       eyebrow: 'Server side',
       title: 'Logic worth trusting',
       body: 'CRM, helpdesk and LMS backends architected in Odoo and Python, with Node and Fastify services carrying data between systems and PostgreSQL holding the line.',
-      tags: [
-        'Odoo v12–v14',
-        'Python',
-        'Node.js',
-        'Fastify',
-        'Flask',
-        'PostgreSQL',
-        'XML-RPC',
-        'GraphQL',
-      ],
+      tags: ['Odoo', 'Python', 'Node.js', 'Fastify', 'Flask', 'PostgreSQL', 'XML-RPC', 'GraphQL'],
     },
   ],
   terminal: [
-    { cmd: 'whoami', out: 'joshua karp — snr full-stack engineer' },
+    { cmd: 'whoami', out: 'joshua karp | snr full-stack engineer' },
     {
       cmd: 'stack --core',
       out: 'react · typescript · odoo · node · postgresql',
@@ -115,21 +106,21 @@ export const stack = {
 
 export const jobs = [
   {
-    when: '2021 — Present',
+    when: '2021 - Present',
     company: 'TaskFlow / TaskSuite',
     where: 'Pretoria, ZA · Texas, USA',
-    role: 'Lead front-end engineer',
+    role: 'Lead engineer',
     scope: 'Frontend division · CRM & LMS',
     points: [
       'Spearheads the frontend division, integrating React client portals with an Odoo backend to deliver real-time dashboards and origination processes.',
-      "Designed and implemented a unified authentication and translation layer between Odoo and external systems — a highly customisable multi-tenant solution shaped to each client's requirements.",
+      "Designed and implemented a unified authentication and translation layer between Odoo and external systems: a highly customisable multi-tenant solution shaped to each client's requirements.",
       'Works with business stakeholders to turn operational workflows into scalable web applications, using pre-built customisable modules or bespoke builds.',
       'Manages a team of developers and owns code review, deployment and version control.',
     ],
   },
   {
-    when: '2018 — 2020',
-    company: 'MECAD — SOLIDWORKS SA',
+    when: '2018 - 2020',
+    company: 'MECAD, SOLIDWORKS SA',
     where: 'Pretoria, ZA',
     role: 'Junior application engineer',
     scope: 'Technical support · Pre-sales · Tooling',
@@ -153,7 +144,7 @@ export const toolkit = [
   },
   {
     group: 'Frameworks',
-    items: ['Odoo (v12–v14)', 'Node.js', 'Fastify', 'Flask', 'Next.js · Gatsby'],
+    items: ['Odoo', 'Node.js', 'Fastify', 'Flask', 'Next.js · Gatsby · Astro'],
   },
   {
     group: 'Cloud & DevOps',
@@ -164,12 +155,16 @@ export const toolkit = [
     group: 'Build',
     items: ['Webpack', 'Rollup', 'Code review', 'Version control'],
   },
+  {
+    group: 'AI',
+    items: ['Agentic Workflows', 'Skills', 'Claude Code · Codex'],
+  },
 ];
 
 export const marquee = [
   { name: 'React', note: 'Daily' },
   { name: 'TypeScript', note: 'Daily' },
-  { name: 'Odoo', note: 'v12–v14' },
+  { name: 'Odoo', note: 'LMS/CRM/ERP' },
   { name: 'PostgreSQL', note: 'Data' },
   { name: 'Node.js', note: 'Services' },
   { name: 'Python', note: 'Backend' },
@@ -180,17 +175,17 @@ export const marquee = [
 ];
 
 export const education = {
-  years: '2013 — 2017',
+  years: '2013 - 2017',
   headline: 'Mechanical, then software.',
   degree: 'BEng Mechanical Engineering',
   school: 'University of Pretoria',
-  body: 'A degree built on design, problem-solving and sustainability. The engineering habit — model the system, find the constraint, build to it — came first; the languages came after.',
+  body: 'A degree built on design, problem-solving and sustainability. The engineering habit came first: model the system, find the constraint, and build to it. The languages came after.',
 };
 
 export const faq = [
   {
     q: 'What do you actually build?',
-    a: 'Client-facing web applications on top of enterprise backends. In practice that means React portals and dashboards wired into Odoo, plus the CRM, helpdesk and LMS logic behind them — and the data pipelines that connect the two.',
+    a: 'Client-facing web applications on top of enterprise backends. In practice that means React portals and dashboards wired into Odoo, plus the CRM, helpdesk and LMS logic behind them, and the data pipelines that connect the two.',
   },
   {
     q: 'How deep does the Odoo work go?',
@@ -198,11 +193,11 @@ export const faq = [
   },
   {
     q: 'Do you lead, or do you build?',
-    a: 'Both. Leading the frontend division at TaskFlow means managing a team of developers and owning code reviews, deployments and version control — while still being the person who designs and implements the layer everything else sits on.',
+    a: 'Both. Leading the frontend division at TaskFlow means managing a team of developers and owning code reviews, deployments and version control while still being the person who designs and implements the layer everything else sits on.',
   },
   {
     q: 'Why a mechanical engineering degree?',
-    a: 'It teaches design and problem-solving before it teaches tools, which transfers cleanly. The first professional code was SOLIDWORKS API plug-ins in VBA and C#, built for engineers with a specific job to do. That habit — build for the person doing the work — has not changed.',
+    a: 'It teaches design and problem-solving before it teaches tools, which transfers cleanly. The first professional code was SOLIDWORKS API plug-ins in VBA and C#, built for engineers with a specific job to do. That habit of building for the person doing the work has not changed.',
   },
   {
     q: 'Where are you, and who do you work with?',
@@ -212,7 +207,7 @@ export const faq = [
 
 export const contact = {
   headline: 'Send the brief.',
-  body: 'The useful first message says what the system has to do and who has to use it. Architecture, a team to lead, or a front end that needs rescuing from the ERP it grew out of — all fair.',
+  body: 'The useful first message says what the system has to do and who has to use it. Architecture, a team to lead, or a front end that needs rescuing from the ERP it grew out of are all fair.',
 };
 
 export const nav = [
