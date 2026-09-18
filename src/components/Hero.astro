@@ -16,7 +16,10 @@ import PortraitPlate from "./PortraitPlate.astro";
             <div>
                 <Eyebrow kanji={profile.mark} label="Engineer dossier" bar />
 
-                <h1 class="display text-[clamp(52px,9.4vw,96px)] leading-[0.94]">
+                <h1
+                    class="display motion-name-shimmer text-[clamp(52px,9.4vw,96px)] leading-[0.94]"
+                    data-shimmer={profile.name}
+                >
                     {profile.name}
                 </h1>
 
