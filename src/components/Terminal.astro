@@ -1,5 +1,5 @@
 ---
-import { profile, stack, jobs } from "../data/cv";
+import { profile, jobs } from "../data/cv";
 ---
 
 <div
@@ -74,7 +74,7 @@ import { profile, stack, jobs } from "../data/cv";
     </div>
 </div>
 
-<script define:vars={{ profile, stack, jobs }}>
+<script define:vars={{ profile, jobs }}>
     (() => {
         const root = document.querySelector("[data-terminal]");
         if (!root) return;
@@ -136,9 +136,7 @@ import { profile, stack, jobs } from "../data/cv";
         };
 
         const printCommand = (command) => {
-            output.append(
-                line(prompt() + escapeHtml(command), "text-ink"),
-            );
+            output.append(line(prompt() + escapeHtml(command), "text-ink"));
         };
 
         const printOutput = (content, className = "text-ink-muted") => {
@@ -185,7 +183,7 @@ import { profile, stack, jobs } from "../data/cv";
                             escapeHtml(profile.title) +
                             " · " +
                             escapeHtml(profile.location) +
-                            "<br><span class=\"text-accent\">7+ years</span> shipping production software",
+                            '<br><span class="text-accent">7+ years</span> shipping production software',
                     );
                     break;
 
@@ -205,7 +203,7 @@ import { profile, stack, jobs } from "../data/cv";
                             escapeHtml(jobs[0].company) +
                             "<br>" +
                             escapeHtml(jobs[0].scope) +
-                            "<br><br><span class=\"text-ink\">" +
+                            '<br><br><span class="text-ink">' +
                             escapeHtml(jobs[1].when) +
                             "</span>  " +
                             escapeHtml(jobs[1].role) +
@@ -222,7 +220,7 @@ import { profile, stack, jobs } from "../data/cv";
 
                 case "contact":
                     printOutput(
-                        "Opening <span class=\"text-accent\">" +
+                        'Opening <span class="text-accent">' +
                             escapeHtml(profile.email) +
                             "</span>...",
                         "text-ink",
@@ -241,7 +239,7 @@ import { profile, stack, jobs } from "../data/cv";
                             escapeHtml(profile.title) +
                             "<br>Location  " +
                             escapeHtml(profile.location) +
-                            "<br>Uptime    7+ years<br>Stack     React / Odoo / Node<br>Status    <span class=\"text-accent\">READY</span>",
+                            '<br>Uptime    7+ years<br>Stack     React / Odoo / Node<br>Status    <span class="text-accent">READY</span>',
                     );
                     break;
 
