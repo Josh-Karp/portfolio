@@ -52,13 +52,6 @@ import { profile, nav } from "../data/cv";
             </div>
         </div>
 
-        <div
-            class="mt-[clamp(36px,6vw,60px)] overflow-hidden text-center font-display text-[clamp(50px,14.2vw,190px)] leading-[0.8] whitespace-nowrap text-transparent [-webkit-text-stroke:1px_rgb(233_229_220/0.16)]"
-            aria-hidden="true"
-        >
-            {profile.name.toUpperCase()}
-        </div>
-
         <div class="flex flex-wrap justify-between gap-3.5 pt-5.5 pb-7.5">
             <span class="mono">
                 © {new Date().getFullYear()} {profile.name} · {profile.title}
@@ -69,7 +62,7 @@ import { profile, nav } from "../data/cv";
             >
                 {profile.mark}
             </span>
-            <span class="mono">Curriculum vitae · single page</span>
+            <span class="mono">Curriculum vitae</span>
         </div>
     </div>
 </footer>

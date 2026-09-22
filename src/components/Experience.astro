@@ -29,9 +29,9 @@ import SectionHead from "./SectionHead.astro";
                         {job.role}
                     </h3>
                     <p class="mono mb-3.5">{job.scope}</p>
-                    <ul class="m-0 list-none p-0">
+                    <ul class="m-0 list-none p-0 pt-2.5">
                         {job.points.map((point) => (
-                            <li class="relative pb-2.5 pl-4.5 text-[13.5px] text-ink-muted before:absolute before:top-2.2 before:left-0 before:h-px before:w-1.5 before:bg-ink-faint before:content-['']">
+                            <li class="relative my-2.5 pl-4.5 text-[13.5px] text-ink-muted before:absolute before:top-1/2 -translate-y-1/2 before:left-0 before:h-px before:w-1.5 before:bg-ink-faint before:content-['']">
                                 {point}
                             </li>
                         ))}
