@@ -2,12 +2,15 @@
 import { profile, contact } from "../data/cv";
 import Section from "./Section.astro";
 import Eyebrow from "./Eyebrow.astro";
+import ContactForm from "./ContactForm.svelte";
 
 const fields = [
     { label: "Email", value: profile.email, href: `mailto:${profile.email}` },
     { label: "Phone", value: profile.phone, href: profile.phoneHref },
     { label: "Based", value: "Pretoria, South Africa", href: null },
 ];
+
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
 ---
 
 <Section label="Contact">
@@ -47,6 +50,8 @@ const fields = [
             >
                 Write an email
             </a>
+
+            <ContactForm client:load turnstileSiteKey={turnstileSiteKey} />
         </div>
     </div>
 </Section>

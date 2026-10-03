@@ -4,7 +4,7 @@ import tsPlugin from '@typescript-eslint/eslint-plugin';
 
 export default [
   {
-    ignores: ['node_modules/', 'dist/', '.astro/', 'pnpm-lock.yaml'],
+    ignores: ['node_modules/', 'dist/', '.astro/', '.vercel/', 'pnpm-lock.yaml'],
   },
   {
     files: ['**/*.{js,mjs,jsx,ts,tsx}'],
@@ -27,6 +27,17 @@ export default [
         },
       ],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
+    },
+  },
+  {
+    files: ['src/pages/api/**/*.ts'],
+    languageOptions: {
+      globals: {
+        console: 'readonly',
+        fetch: 'readonly',
+        Response: 'readonly',
+        URLSearchParams: 'readonly',
+      },
     },
   },
 ];
