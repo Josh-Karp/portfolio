@@ -14,8 +14,12 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@astrojs/svelte": "^9.0.1",
+    "@astrojs/vercel": "^11.0.11",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.3.3"
+    "astro": "^7.3.3",
+    "resend": "^6.32.0",
+    "svelte": "^5.57.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
