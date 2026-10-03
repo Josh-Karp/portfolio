@@ -12,7 +12,10 @@ import SectionHead from "./SectionHead.astro";
 
     <div class="border-t border-l border-line sm:hidden">
         {toolkit.map((group, index) => (
-            <details open={index === 0} class="group border-r border-b border-line">
+            <details
+                open={index === 0}
+                class="toolkit-disclosure group border-r border-b border-line"
+            >
                 <summary class="relative cursor-pointer list-none px-[18px] py-4.25 pr-20 marker:hidden [&::-webkit-details-marker]:hidden after:absolute after:top-1/2 after:right-[18px] after:-translate-y-1/2 after:font-mono after:text-[15px] after:text-ink-faint after:content-['+'] group-open:after:content-['–']">
                     <span class="mono">{group.group}</span>
                     <span class="mono absolute top-1/2 right-11.5 -translate-y-1/2 text-[8px] tracking-[0.16em]">
@@ -55,5 +58,50 @@ import SectionHead from "./SectionHead.astro";
         details:not([open]) > .toolkit-panel {
             display: grid;
         }
+
+        details[data-closing] > .toolkit-panel {
+            grid-template-rows: 0fr;
+        }
     }
 </style>
+
+<script>
+    const closingDuration = 250;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    document.querySelectorAll<HTMLDetailsElement>(".toolkit-disclosure").forEach((details) => {
+        const summary = details.querySelector("summary");
+        const panel = details.querySelector<HTMLElement>(".toolkit-panel");
+
+        if (!summary || !panel) return;
+
+        summary.addEventListener("click", (event) => {
+            if (!details.open || reducedMotion.matches) return;
+
+            event.preventDefault();
+
+            if (details.dataset.closing !== undefined) return;
+
+            details.dataset.closing = "";
+            let closingTimer: number | undefined;
+
+            const finishClosing = () => {
+                if (closingTimer !== undefined) window.clearTimeout(closingTimer);
+                details.removeAttribute("open");
+                delete details.dataset.closing;
+            };
+
+            panel.addEventListener(
+                "transitionend",
+                (transitionEvent) => {
+                    if (transitionEvent.target === panel && transitionEvent.propertyName === "grid-template-rows") {
+                        finishClosing();
+                    }
+                },
+                { once: true },
+            );
+
+            closingTimer = window.setTimeout(finishClosing, closingDuration + 50);
+        });
+    });
+</script>
