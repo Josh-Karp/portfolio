@@ -106,6 +106,35 @@
   .shell {
     @apply mx-auto w-full max-w-310 px-[clamp(18px,4vw,44px)];
   }
+
+  .animated-disclosure-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 250ms ease-out;
+  }
+
+  .animated-disclosure-panel > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  details[open] > .animated-disclosure-panel {
+    grid-template-rows: 1fr;
+  }
+
+  details:not([open]) > .animated-disclosure-panel {
+    display: grid;
+  }
+
+  details[data-closing] > .animated-disclosure-panel {
+    grid-template-rows: 0fr;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animated-disclosure-panel {
+      transition: none;
+    }
+  }
 }
 
 @utility barcode {

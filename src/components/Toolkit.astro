@@ -10,7 +10,35 @@ import SectionHead from "./SectionHead.astro";
         Grouped the way it gets used, not the way it looks on a keyword scan.
     </p>
 
-    <div class="grid grid-cols-1 border-t border-l border-line sm:grid-cols-2 lg:grid-cols-3">
+    <div class="border-t border-l border-line sm:hidden">
+        {toolkit.map((group, index) => (
+            <details
+                open={index === 0}
+                data-animated-disclosure
+                class="group border-r border-b border-line"
+            >
+                <summary class="relative cursor-pointer list-none px-[18px] py-4.25 pr-20 marker:hidden [&::-webkit-details-marker]:hidden after:absolute after:top-1/2 after:right-[18px] after:-translate-y-1/2 after:font-mono after:text-[15px] after:text-ink-faint after:content-['+'] group-open:after:content-['–']">
+                    <span class="mono">{group.group}</span>
+                    <span class="mono absolute top-1/2 right-11.5 -translate-y-1/2 text-[8px] tracking-[0.16em]">
+                        {group.items.length} tools
+                    </span>
+                </summary>
+                <div class="animated-disclosure-panel">
+                    <div>
+                        <ul class="m-0 list-none border-t border-line-soft px-[18px] pb-[18px] pt-2.5">
+                            {group.items.map((item) => (
+                                <li class="border-b border-line-soft py-1.25 text-[13.5px] text-ink-muted last:border-b-0">
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </details>
+        ))}
+    </div>
+
+    <div class="hidden border-t border-l border-line sm:grid sm:grid-cols-2 lg:grid-cols-3">
         {toolkit.map((group) => (
             <div class="border-r border-b border-line p-[clamp(18px,2.4vw,24px)]">
                 <h4 class="mono mb-3.5">{group.group}</h4>

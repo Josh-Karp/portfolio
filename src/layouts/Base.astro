@@ -34,5 +34,48 @@ const {
     </head>
     <body>
         <slot />
+        <script>
+            const closingDuration = 250;
+            const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+            document
+                .querySelectorAll<HTMLDetailsElement>("[data-animated-disclosure]")
+                .forEach((details) => {
+                    const summary = details.querySelector("summary");
+                    const panel = details.querySelector<HTMLElement>(".animated-disclosure-panel");
+
+                    if (!summary || !panel) return;
+
+                    summary.addEventListener("click", (event) => {
+                        if (!details.open || reducedMotion.matches) return;
+
+                        event.preventDefault();
+
+                        if (details.dataset.closing !== undefined) return;
+
+                        details.dataset.closing = "";
+                        let closingTimer: number | undefined;
+
+                        const onTransitionEnd = (transitionEvent: TransitionEvent) => {
+                            if (
+                                transitionEvent.target === panel &&
+                                transitionEvent.propertyName === "grid-template-rows"
+                            ) {
+                                finishClosing();
+                            }
+                        };
+
+                        const finishClosing = () => {
+                            if (closingTimer !== undefined) window.clearTimeout(closingTimer);
+                            panel.removeEventListener("transitionend", onTransitionEnd);
+                            details.removeAttribute("open");
+                            delete details.dataset.closing;
+                        };
+
+                        panel.addEventListener("transitionend", onTransitionEnd);
+                        closingTimer = window.setTimeout(finishClosing, closingDuration + 50);
+                    });
+                });
+        </script>
     </body>
 </html>
