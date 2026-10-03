@@ -19,13 +19,17 @@ import SectionHead from "./SectionHead.astro";
                         {group.items.length} tools
                     </span>
                 </summary>
-                <ul class="m-0 list-none border-t border-line-soft px-[18px] pb-[18px] pt-2.5">
-                    {group.items.map((item) => (
-                        <li class="border-b border-line-soft py-1.25 text-[13.5px] text-ink-muted last:border-b-0">
-                            {item}
-                        </li>
-                    ))}
-                </ul>
+                <div class="toolkit-panel grid grid-rows-[0fr] transition-[grid-template-rows] duration-250 ease-out motion-reduce:transition-none group-open:grid-rows-[1fr]">
+                    <div class="min-h-0 overflow-hidden">
+                        <ul class="m-0 list-none border-t border-line-soft px-[18px] pb-[18px] pt-2.5">
+                            {group.items.map((item) => (
+                                <li class="border-b border-line-soft py-1.25 text-[13.5px] text-ink-muted last:border-b-0">
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
             </details>
         ))}
     </div>
@@ -45,3 +49,11 @@ import SectionHead from "./SectionHead.astro";
         ))}
     </div>
 </Section>
+
+<style>
+    @media (width < 40rem) {
+        details:not([open]) > .toolkit-panel {
+            display: grid;
+        }
+    }
+</style>
