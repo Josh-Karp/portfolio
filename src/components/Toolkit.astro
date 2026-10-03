@@ -14,7 +14,8 @@ import SectionHead from "./SectionHead.astro";
         {toolkit.map((group, index) => (
             <details
                 open={index === 0}
-                class="toolkit-disclosure group border-r border-b border-line"
+                data-animated-disclosure
+                class="group border-r border-b border-line"
             >
                 <summary class="relative cursor-pointer list-none px-[18px] py-4.25 pr-20 marker:hidden [&::-webkit-details-marker]:hidden after:absolute after:top-1/2 after:right-[18px] after:-translate-y-1/2 after:font-mono after:text-[15px] after:text-ink-faint after:content-['+'] group-open:after:content-['–']">
                     <span class="mono">{group.group}</span>
@@ -22,8 +23,8 @@ import SectionHead from "./SectionHead.astro";
                         {group.items.length} tools
                     </span>
                 </summary>
-                <div class="toolkit-panel grid grid-rows-[0fr] transition-[grid-template-rows] duration-250 ease-out motion-reduce:transition-none group-open:grid-rows-[1fr]">
-                    <div class="min-h-0 overflow-hidden">
+                <div class="animated-disclosure-panel">
+                    <div>
                         <ul class="m-0 list-none border-t border-line-soft px-[18px] pb-[18px] pt-2.5">
                             {group.items.map((item) => (
                                 <li class="border-b border-line-soft py-1.25 text-[13.5px] text-ink-muted last:border-b-0">
@@ -52,56 +53,3 @@ import SectionHead from "./SectionHead.astro";
         ))}
     </div>
 </Section>
-
-<style>
-    @media (width < 40rem) {
-        details:not([open]) > .toolkit-panel {
-            display: grid;
-        }
-
-        details[data-closing] > .toolkit-panel {
-            grid-template-rows: 0fr;
-        }
-    }
-</style>
-
-<script>
-    const closingDuration = 250;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    document.querySelectorAll<HTMLDetailsElement>(".toolkit-disclosure").forEach((details) => {
-        const summary = details.querySelector("summary");
-        const panel = details.querySelector<HTMLElement>(".toolkit-panel");
-
-        if (!summary || !panel) return;
-
-        summary.addEventListener("click", (event) => {
-            if (!details.open || reducedMotion.matches) return;
-
-            event.preventDefault();
-
-            if (details.dataset.closing !== undefined) return;
-
-            details.dataset.closing = "";
-            let closingTimer: number | undefined;
-
-            const finishClosing = () => {
-                if (closingTimer !== undefined) window.clearTimeout(closingTimer);
-                details.removeAttribute("open");
-                delete details.dataset.closing;
-            };
-
-            panel.addEventListener(
-                "transitionend",
-                (transitionEvent) => {
-                    if (transitionEvent.target === panel && transitionEvent.propertyName === "grid-template-rows") {
-                        finishClosing();
-                    }
-                },
-                { once: true },
-            );
-
-            closingTimer = window.setTimeout(finishClosing, closingDuration + 50);
-        });
-    });
-</script>
