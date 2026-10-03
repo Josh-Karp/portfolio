@@ -21,6 +21,8 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
                 {contact.headline}
             </h2>
             <p class="lede mt-4.5">{contact.body}</p>
+
+            <ContactForm client:load turnstileSiteKey={turnstileSiteKey} />
         </div>
 
         <div class="border border-line bg-panel p-[clamp(18px,3vw,26px)]">
@@ -50,8 +52,6 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
             >
                 Write an email
             </a>
-
-            <ContactForm client:load turnstileSiteKey={turnstileSiteKey} />
         </div>
     </div>
 </Section>
